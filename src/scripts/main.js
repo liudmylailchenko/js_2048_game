@@ -59,9 +59,7 @@ class Game {
     this.gameOver = false;
     this.hasWon = false;
 
-    this.matrix = new Array(this.tableSize)
-      .fill([])
-      .map(() => new Array(this.tableSize).fill(0));
+   this.initMatrix();
 
     this.messageLoseEl.classList.add('hidden');
     this.messageWinEl.classList.add('hidden');
@@ -274,8 +272,19 @@ class Game {
   /**
    * Render the matrix and show win/lose messages when needed
    */
+initMatrix(){
+    if(!this.matrix)
+    {
+        this.matrix = new Array(this.tableSize)
+          .fill([])
+          .map(() => new Array(this.tableSize).fill(0));
+    }
+}
+
   render() {
     const { rows } = this.tableEl;
+
+    this.initMatrix();
 
     this.numberElements.forEach((el) => {
       el.textContent = '';
